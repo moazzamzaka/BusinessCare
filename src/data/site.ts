@@ -100,13 +100,6 @@ export const services = [
   },
 ];
 
-/** Logo marquee — neutral placeholder wordmarks. */
-export const clients = [
-  'NORTHWIND', 'MERIDIAN', 'AXIOM HEALTH', 'BLUEPORT', 'LANDMARK',
-  'HELIOS', 'COREBANK', 'VERTEX', 'ATLAS GRID', 'HARBOURLINE',
-  'NOVA RETAIL', 'CIVICWORKS', 'PINNACLE', 'ORBITEL', 'STONEBRIDGE',
-];
-
 /** Interactive showcase rows. */
 export const showcase = {
   heading: 'Every floor of the business, switched on.',
