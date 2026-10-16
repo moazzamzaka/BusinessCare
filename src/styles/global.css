@@ -1102,94 +1102,6 @@ h4 {
 }
 
 /* --------------------------------------------------------------------------
-   Results
-   -------------------------------------------------------------------------- */
-.cases {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-  gap: clamp(1rem, 2vw, 1.5rem);
-}
-
-.case {
-  position: relative;
-  display: grid;
-  grid-template-rows: auto 1fr;
-  border: 1px solid var(--line-night);
-  border-radius: var(--r-lg);
-  overflow: hidden;
-  background: var(--night-2);
-  transition: transform 0.5s var(--ease-out), border-color 0.5s var(--ease-out);
-}
-
-.case:hover {
-  transform: translateY(-6px);
-  border-color: var(--line-night-2);
-}
-
-.case__art {
-  position: relative;
-  aspect-ratio: 16 / 10;
-  overflow: hidden;
-}
-
-.case__art svg {
-  transition: transform 0.7s var(--ease-out);
-}
-
-.case:hover .case__art svg {
-  transform: scale(1.05);
-}
-
-.case__tags {
-  position: absolute;
-  top: 0.9rem;
-  left: 0.9rem;
-  display: flex;
-  gap: 0.4rem;
-}
-
-.case__tags .chip {
-  background: rgba(11, 13, 38, 0.7);
-  backdrop-filter: blur(6px);
-}
-
-.case__body {
-  padding: clamp(1.2rem, 2.4vw, 1.75rem);
-  display: grid;
-  gap: 0.9rem;
-  align-content: start;
-}
-
-.case__stat {
-  font-size: clamp(2.6rem, 1.6rem + 3.4vw, 4rem);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1;
-}
-
-.case__stat span {
-  font-size: 0.95rem;
-  display: block;
-  color: var(--on-night-2);
-  font-weight: 500;
-  letter-spacing: 0;
-  margin-top: 0.4rem;
-  max-width: 30ch;
-}
-
-.case__title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.3;
-}
-
-.case__client {
-  color: var(--on-night-2);
-  font-size: 0.85rem;
-}
-
-/* --------------------------------------------------------------------------
    Pillars + embed
    -------------------------------------------------------------------------- */
 .pillars {
@@ -1540,17 +1452,6 @@ h4 {
   color: var(--peri);
 }
 
-.footer__offices {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.25rem;
-  margin-top: clamp(2.5rem, 5vw, 3.5rem);
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--line-night);
-  color: var(--on-night-2);
-  font-size: 0.9rem;
-}
-
 .footer__bottom {
   display: flex;
   flex-wrap: wrap;
@@ -1618,7 +1519,6 @@ h4 {
 
 /* Placeholder artwork fills its frame -------------------------------- */
 .showcase__art svg,
-.case__art svg,
 .industry__art svg,
 .embed__figure svg {
   width: 100%;

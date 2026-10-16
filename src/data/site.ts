@@ -66,14 +66,6 @@ export const nav: {
     ],
   },
   {
-    label: 'Results',
-    href: '#results',
-    panel: [
-      { label: 'Case studies', blurb: 'Measured on client numbers', href: '#results' },
-      { label: 'Client words', blurb: 'What teams say afterwards', href: '#voices' },
-    ],
-  },
-  {
     label: 'How we work',
     href: '#how',
     panel: [
@@ -85,7 +77,7 @@ export const nav: {
 ];
 
 export const hero = {
-  eyebrow: 'Ten years · 500+ systems in production',
+  eyebrow: 'Three years · 10+ systems in production',
   titleLines: ['Give your operations', 'AI that actually ships.'],
   lede:
     'We take AI from the first roadmap to production, with engineers embedded in your teams — on site or virtually — and stay accountable for the outcome.',
@@ -233,51 +225,6 @@ export const core = {
   },
 };
 
-/** Case-study tiles. */
-export const results = {
-  heading: 'AI in production, measured on our clients’ numbers.',
-  lede:
-    'Every result here comes from a system we built and ran. Client names stay private; the numbers are theirs.',
-  cases: [
-    {
-      industry: 'Healthcare',
-      kind: 'AI agents',
-      stat: '40%',
-      statLabel: 'reduction in case resolution time',
-      title: 'An agentic service hub for a global pharmaceutical company',
-      client: 'A global pharmaceutical company',
-      hue: 340,
-    },
-    {
-      industry: 'Transport & logistics',
-      kind: 'Predictive AI',
-      stat: '86%',
-      statLabel: 'prediction accuracy on empty container arrivals',
-      title: 'Forecasting empty containers to free up dock space',
-      client: 'A container shipping company',
-      hue: 200,
-    },
-    {
-      industry: 'Banking & insurance',
-      kind: 'AI agents',
-      stat: '72%',
-      statLabel: 'reduction in manual policy review time',
-      title: 'A regulatory compliance scoring agent on a bank’s own servers',
-      client: 'A large bank',
-      hue: 258,
-    },
-    {
-      industry: 'Healthcare',
-      kind: 'Data foundations',
-      stat: '2×',
-      statLabel: 'reduction in infrastructure cost by moving to the cloud',
-      title: 'A privacy-ready data platform for real-time care decisions',
-      client: 'A leading healthcare organisation',
-      hue: 150,
-    },
-  ],
-};
-
 /** Plan / Build / Operate band. */
 export const pillars = {
   heading: 'From the first decision to production, one team.',
@@ -310,7 +257,7 @@ export const embed = {
   body:
     'Forward-deployed engineers and a deployment lead join your team, working in your tools, your stand-ups and your hours. They pick one workflow, measure it, build it and stay accountable for the result.',
   modes: [
-    { name: 'On site', desc: 'Engineers at your desks for discovery, the build and go-live, from the nearest of our offices.' },
+    { name: 'On site', desc: 'Engineers at your desks for discovery, the build and go-live.' },
     { name: 'Virtually embedded', desc: 'In your chat channels, stand-ups and repositories, under identities you issue.' },
     { name: 'Hybrid', desc: 'A lead on site, the squad embedded virtually, scaled up and down as the work demands.' },
   ],
@@ -367,8 +314,6 @@ export const closing = {
   secondary: { label: 'Check a workflow first', href: '#how' },
 };
 
-export const offices = ['London', 'Singapore', 'Dubai', 'Toronto'];
-
 export const footer = [
   {
     heading: 'What we do',
@@ -395,7 +340,6 @@ export const footer = [
   {
     heading: 'Company',
     links: [
-      { label: 'Results', href: '#results' },
       { label: 'Clients', href: '#voices' },
       { label: 'About', href: '#about' },
       { label: 'Careers', href: '#about' },

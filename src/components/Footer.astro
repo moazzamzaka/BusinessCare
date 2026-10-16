@@ -1,6 +1,6 @@
 ---
 import LogoMark from './LogoMark.astro';
-import { meta, footer, offices } from '../data/site';
+import { meta, footer } from '../data/site';
 ---
 
 <footer class="footer" id="about">
@@ -26,11 +26,6 @@ import { meta, footer, offices } from '../data/site';
           </ul>
         </div>
       ))}
-    </div>
-
-    <div class="footer__offices">
-      <strong style="color:var(--on-night)">Offices</strong>
-      {offices.map((o) => <span>{o}</span>)}
     </div>
 
     <div class="footer__bottom">
