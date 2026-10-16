@@ -1,0 +1,36 @@
+---
+import Art from './Art.astro';
+import { results } from '../data/site';
+---
+
+<section class="section" id="results">
+  <div class="wrap">
+    <div class="section__head" data-reveal>
+      <span class="eyebrow">Results</span>
+      <h2 class="h2">{results.heading}</h2>
+      <p class="lede">{results.lede}</p>
+    </div>
+
+    <div class="cases">
+      {results.cases.map((c, i) => (
+        <article class="case" data-reveal style={`--d:${i * 70}ms`}>
+          <div class="case__art">
+            <Art hue={c.hue} variant="card" label={`Illustration for ${c.title}`} />
+            <div class="case__tags">
+              <span class="chip">{c.industry}</span>
+              <span class="chip">{c.kind}</span>
+            </div>
+          </div>
+          <div class="case__body">
+            <p class="case__stat mono-num">
+              {c.stat}
+              <span>{c.statLabel}</span>
+            </p>
+            <h3 class="case__title">{c.title}</h3>
+            <p class="case__client">{c.client}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

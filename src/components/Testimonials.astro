@@ -1,0 +1,25 @@
+---
+import { testimonials } from '../data/site';
+---
+
+<section class="section" id="voices">
+  <div class="wrap">
+    <div class="section__head" data-reveal>
+      <span class="eyebrow">In our clients’ words</span>
+      <h2 class="h2">What teams say once it is running.</h2>
+    </div>
+
+    <div class="voices">
+      {testimonials.map((t, i) => (
+        <figure class="voice" data-reveal style={`--d:${i * 70}ms`}>
+          <blockquote>{t.quote}</blockquote>
+          <figcaption>
+            <strong>{t.name}</strong>
+            <span>{t.role}</span>
+            <em>{t.org}</em>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

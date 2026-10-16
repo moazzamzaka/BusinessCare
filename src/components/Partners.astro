@@ -1,0 +1,19 @@
+---
+import { partners } from '../data/site';
+---
+
+<section class="section--tight" id="trust">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal style="margin-bottom:1.5rem;text-align:center">
+      Certified partner of the platforms you already run on.
+    </p>
+    <div class="partners" data-reveal>
+      {partners.map((p) => (
+        <div class="partner">
+          <strong>{p.name}</strong>
+          <span>{p.sub}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

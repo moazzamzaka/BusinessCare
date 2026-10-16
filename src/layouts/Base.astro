@@ -1,0 +1,208 @@
+---
+import '@fontsource-variable/manrope';
+import '../styles/global.css';
+import { meta } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = meta.title, description = meta.description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#0b0d26" />
+    <link rel="icon" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`} type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={meta.url} />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <slot />
+
+    <script>
+      // Scroll reveals ------------------------------------------------------
+      const reveal = () => {
+        const targets = document.querySelectorAll('[data-reveal]');
+        if (!('IntersectionObserver' in window)) {
+          targets.forEach((el) => el.classList.add('is-in'));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -12% 0px', threshold: 0.12 }
+        );
+        targets.forEach((el) => io.observe(el));
+      };
+
+      // Sticky header state -------------------------------------------------
+      const header = () => {
+        const el = document.querySelector<HTMLElement>('.hdr');
+        if (!el) return;
+        const onScroll = () => el.classList.toggle('is-stuck', window.scrollY > 12);
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+      };
+
+      // Mobile drawer -------------------------------------------------------
+      const drawer = () => {
+        const toggle = document.querySelector<HTMLButtonElement>('.burger');
+        const panel = document.querySelector<HTMLElement>('.drawer');
+        if (!toggle || !panel) return;
+
+        const setOpen = (open: boolean) => {
+          panel.dataset.open = String(open);
+          toggle.setAttribute('aria-expanded', String(open));
+          document.documentElement.style.overflowY = open ? 'hidden' : '';
+        };
+
+        toggle.addEventListener('click', () =>
+          setOpen(panel.dataset.open !== 'true')
+        );
+        panel.querySelectorAll('a').forEach((a) =>
+          a.addEventListener('click', () => setOpen(false))
+        );
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') setOpen(false);
+        });
+
+        panel.querySelectorAll<HTMLElement>('.drawer__toggle').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const group = btn.closest('.drawer__group');
+            if (!group) return;
+            const open = group.dataset.open === 'true';
+            group.dataset.open = String(!open);
+            btn.setAttribute('aria-expanded', String(!open));
+          });
+        });
+      };
+
+      // Hero parallax glow --------------------------------------------------
+      const parallax = () => {
+        const glow = document.querySelector<HTMLElement>('.hero__glow');
+        if (!glow || window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+          return;
+        window.addEventListener(
+          'pointermove',
+          (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 40;
+            const y = (e.clientY / window.innerHeight - 0.5) * 30;
+            glow.style.setProperty('--ex', `${x}px`);
+            glow.style.setProperty('--ey', `${y}px`);
+          },
+          { passive: true }
+        );
+      };
+
+      // Showcase ------------------------------------------------------------
+      const showcase = () => {
+        document.querySelectorAll<HTMLElement>('[data-showcase]').forEach((root) => {
+          const rows = [...root.querySelectorAll<HTMLButtonElement>('.frow')];
+          const panels = [...root.querySelectorAll<HTMLElement>('.showcase__art')];
+          const captionN = root.querySelector<HTMLElement>('.showcase__caption .n');
+          const captionK = root.querySelector<HTMLElement>('.showcase__caption .k');
+          if (!rows.length) return;
+
+          const activate = (i: number) => {
+            rows.forEach((r, idx) => r.setAttribute('aria-current', String(idx === i)));
+            panels.forEach((p, idx) => p.toggleAttribute('hidden', idx !== i));
+            if (captionN) captionN.textContent = rows[i].dataset.name ?? '';
+            if (captionK) captionK.textContent = rows[i].dataset.kicker ?? '';
+          };
+
+          rows.forEach((row, i) => {
+            row.addEventListener('click', () => activate(i));
+            row.addEventListener('focus', () => activate(i));
+            row.addEventListener('mouseenter', () => activate(i));
+          });
+
+          activate(0);
+        });
+      };
+
+      // Desktop mega menus --------------------------------------------------
+      // Click toggles a panel; hover still works (CSS). Clicking a row
+      // navigates and closes; outside-click and Escape close everything.
+      const navMenus = () => {
+        const items = [...document.querySelectorAll<HTMLElement>('.nav__item')].filter(
+          (item) => item.querySelector('.mega')
+        );
+        if (!items.length) return;
+
+        const closeAll = (except?: HTMLElement) => {
+          items.forEach((item) => {
+            if (item === except) return;
+            item.dataset.open = 'false';
+            item.querySelector('.nav__link')?.setAttribute('aria-expanded', 'false');
+          });
+        };
+
+        items.forEach((item) => {
+          const link = item.querySelector<HTMLAnchorElement>('.nav__link');
+          const mega = item.querySelector<HTMLElement>('.mega');
+          if (!link || !mega) return;
+
+          link.setAttribute('aria-expanded', 'false');
+
+          link.addEventListener('click', (e) => {
+            // A top-level item is a menu: open it instead of jumping.
+            e.preventDefault();
+            const open = item.dataset.open === 'true';
+            closeAll(item);
+            item.dataset.open = String(!open);
+            link.setAttribute('aria-expanded', String(!open));
+          });
+
+          // Choosing a row navigates, then closes the menu.
+          mega.querySelectorAll('a').forEach((a) =>
+            a.addEventListener('click', () => {
+              item.dataset.open = 'false';
+              link.setAttribute('aria-expanded', 'false');
+              link.blur();
+            })
+          );
+        });
+
+        document.addEventListener('pointerdown', (e) => {
+          const target = e.target as Node;
+          if (!items.some((item) => item.contains(target))) closeAll();
+        });
+
+        window.addEventListener('keydown', (e) => {
+          if (e.key !== 'Escape') return;
+          const open = items.find((item) => item.dataset.open === 'true');
+          if (!open) return;
+          open.dataset.open = 'false';
+          open.querySelector('.nav__link')?.setAttribute('aria-expanded', 'false');
+          (open.querySelector('.nav__link') as HTMLElement | null)?.focus();
+        });
+      };
+
+      reveal();
+      header();
+      drawer();
+      parallax();
+      showcase();
+      navMenus();
+    </script>
+  </body>
+</html>

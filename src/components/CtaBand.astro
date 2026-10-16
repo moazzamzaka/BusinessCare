@@ -1,0 +1,23 @@
+---
+import { closing } from '../data/site';
+
+const Arrow = `<svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>`;
+---
+
+<section class="section--tight" id="contact">
+  <div class="wrap">
+    <div class="closing" data-reveal>
+      <h2 class="h2">{closing.heading}</h2>
+      <p>{closing.lede}</p>
+      <div class="closing__cta">
+        <a class="btn btn--grad" href={closing.primary.href}>
+          {closing.primary.label}
+          <Fragment set:html={Arrow} />
+        </a>
+        <a class="btn btn--ghost" href={closing.secondary.href}>
+          {closing.secondary.label}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

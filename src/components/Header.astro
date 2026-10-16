@@ -1,0 +1,91 @@
+---
+import LogoMark from './LogoMark.astro';
+import { nav, cta, meta } from '../data/site';
+
+const Arrow = `<svg class="arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>`;
+const Chevron = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>`;
+---
+
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a class="brand" href="#top" aria-label={`${meta.name} home`}>
+      <LogoMark name={meta.name} size={26} />
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      {nav.map((item) => (
+        <div class="nav__item">
+          {item.panel && item.panel.length ? (
+            <>
+              <a class="nav__link" href={item.href} aria-haspopup="true">
+                {item.label}
+                <Fragment set:html={Chevron} />
+              </a>
+              <div class="mega" role="group" aria-label={item.label}>
+                {item.panel.map((row) => (
+                  <a class="mega__row" href={row.href}>
+                    <span>
+                      <strong>{row.label}</strong>
+                      <span>{row.blurb}</span>
+                    </span>
+                    <Fragment set:html={Arrow} />
+                  </a>
+                ))}
+              </div>
+            </>
+          ) : (
+            <a class="nav__link" href={item.href}>{item.label}</a>
+          )}
+        </div>
+      ))}
+    </nav>
+
+    <div class="nav__actions">
+      <a class="btn btn--grad" href={cta.primary.href}>
+        {cta.primary.label}
+        <Fragment set:html={Arrow} />
+      </a>
+      <button
+        class="burger"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile drawer -->
+<div class="drawer" id="mobile-menu" data-open="false">
+  {nav.map((item) =>
+    item.panel && item.panel.length ? (
+      <div class="drawer__group" data-open="false">
+        <button class="drawer__toggle" type="button" aria-expanded="false">
+          {item.label}
+          <Fragment set:html={Chevron} />
+        </button>
+        <div class="drawer__panel">
+          {item.panel.map((row) => (
+            <a href={row.href}>
+              <strong>{row.label}</strong>
+              <span>{row.blurb}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    ) : (
+      <div class="drawer__group" data-open="false">
+        <a class="drawer__toggle" href={item.href}>{item.label}</a>
+      </div>
+    )
+  )}
+
+  <div class="drawer__cta">
+    <a class="btn btn--grad" href={cta.primary.href}>{cta.primary.label}</a>
+    <a class="btn btn--ghost" href={cta.secondary.href}>{cta.secondary.label}</a>
+  </div>
+</div>

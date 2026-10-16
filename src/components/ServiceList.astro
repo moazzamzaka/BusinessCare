@@ -1,0 +1,34 @@
+---
+import { services } from '../data/site';
+
+const Arrow = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>`;
+---
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section__head" data-reveal>
+      <span class="eyebrow">What we do</span>
+      <h2 class="h2">Five ways in, one team to run them.</h2>
+      <p class="lede">
+        Start where the pain is sharpest. We bring the same engineers, controls and path
+        to production to every one of them.
+      </p>
+    </div>
+
+    <div class="services__list">
+      {services.map((s, i) => (
+        <a class="service" href={s.href} data-reveal style={`--d:${i * 60}ms`}>
+          <span class="service__n mono-num">{s.n}</span>
+          <span>
+            <span class="service__kicker">{s.kicker}</span>
+            <span class="service__name" style="display:block">{s.name}</span>
+            <span class="service__desc" style="display:block">{s.desc}</span>
+          </span>
+          <span class="service__go" aria-hidden="true">
+            <Fragment set:html={Arrow} />
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

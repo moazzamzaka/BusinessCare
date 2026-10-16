@@ -1,0 +1,49 @@
+---
+import Art from './Art.astro';
+import { showcase } from '../data/site';
+---
+
+<section class="section" id="platform-work" data-showcase>
+  <div class="wrap">
+    <div class="section__head" data-reveal>
+      <span class="eyebrow">In the building</span>
+      <h2 class="h2">{showcase.heading}</h2>
+      <p class="lede">{showcase.lede}</p>
+    </div>
+
+    <div class="showcase__grid">
+      <div class="showcase__rows">
+        {showcase.rows.map((row, i) => (
+          <button
+            class="frow"
+            type="button"
+            aria-current={i === 0 ? 'true' : 'false'}
+            data-name={row.name}
+            data-kicker={row.kicker}
+          >
+            <span class="frow__dot" aria-hidden="true"></span>
+            <span>
+              <span class="frow__kicker">{row.kicker}</span>
+              <span class="frow__name" style="display:block">{row.name}</span>
+              <span class="frow__desc" style="display:block">{row.desc}</span>
+              <span class="frow__stat" style="display:block">{row.stat}</span>
+            </span>
+            <span class="frow__n mono-num">{row.n}</span>
+          </button>
+        ))}
+      </div>
+
+      <div class="showcase__panel">
+        {showcase.rows.map((row, i) => (
+          <div class="showcase__art" hidden={i !== 0}>
+            <Art hue={row.hue} variant="panel" label={`Illustration for ${row.name}`} />
+          </div>
+        ))}
+        <div class="showcase__caption">
+          <span class="k">{showcase.rows[0].kicker}</span>
+          <span class="n">{showcase.rows[0].name}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

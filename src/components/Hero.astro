@@ -1,0 +1,45 @@
+---
+import { hero, cta, clients } from '../data/site';
+
+const stats = [
+  { v: '10 yrs', l: 'building AI in production' },
+  { v: '500+', l: 'systems shipped' },
+  { v: '4', l: 'offices worldwide' },
+];
+
+const Arrow = `<svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>`;
+---
+
+<section class="hero" id="top">
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="wrap hero__in">
+    <span class="hero__eyebrow" data-reveal>
+      <span class="dot" aria-hidden="true"></span>
+      <span class="eyebrow" style="text-transform:none;letter-spacing:0">{hero.eyebrow}</span>
+    </span>
+
+    <h1 class="display" data-reveal style="--d:80ms">
+      {hero.titleLines[0]}<br />
+      <span class="grad-text">{hero.titleLines[1]}</span>
+    </h1>
+
+    <p class="hero__lede" data-reveal style="--d:160ms">{hero.lede}</p>
+
+    <div class="hero__cta" data-reveal style="--d:240ms">
+      <a class="btn btn--grad" href={cta.primary.href}>
+        {cta.primary.label}
+        <Fragment set:html={Arrow} />
+      </a>
+      <a class="btn btn--ghost" href={cta.secondary.href}>{cta.secondary.label}</a>
+    </div>
+
+    <div class="hero__meta" data-reveal style="--d:320ms">
+      {stats.map((s) => (
+        <div class="hero__stat">
+          <strong class="mono-num">{s.v}</strong>
+          <span>{s.l}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

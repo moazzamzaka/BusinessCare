@@ -1,0 +1,111 @@
+---
+/**
+ * Generative placeholder artwork.
+ *
+ * Renders a self-contained inline SVG: layered gradient mesh, soft blobs,
+ * a faint rule-grid and a couple of geometric accents. Everything is derived
+ * from `hue`, so callers get a family of images that feel related but distinct.
+ * No external assets, no network requests.
+ */
+interface Props {
+  hue?: number;
+  variant?: 'panel' | 'card' | 'wide';
+  class?: string;
+  label?: string;
+}
+
+const { hue = 232, variant = 'card', class: cls = '', label = 'Abstract placeholder artwork' } = Astro.props;
+
+const uid = `a${Math.random().toString(36).slice(2, 9)}`;
+
+// Palette derived from the hue, kept inside the site's night-navy range.
+const h1 = hue;
+const h2 = (hue + 28) % 360;
+const h3 = (hue + 320) % 360;
+
+const base = `hsl(${h1} 62% 10%)`;
+const deep = `hsl(${h2} 58% 16%)`;
+const glow = `hsl(${h2} 88% 62%)`;
+const accent = `hsl(${h3} 84% 60%)`;
+const mint = `hsl(${(hue + 150) % 360} 70% 55%)`;
+
+const grid = variant === 'wide' ? 14 : 10;
+const cols = variant === 'wide' ? [70, 140, 210] : [60, 120];
+---
+
+<svg
+  class={cls}
+  viewBox="0 0 800 600"
+  preserveAspectRatio="xMidYMid slice"
+  role="img"
+  aria-label={label}
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <linearGradient id={`${uid}-bg`} x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color={base} />
+      <stop offset="0.55" stop-color={deep} />
+      <stop offset="1" stop-color={base} />
+    </linearGradient>
+
+    <radialGradient id={`${uid}-g1`} cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color={glow} stop-opacity="0.85" />
+      <stop offset="1" stop-color={glow} stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id={`${uid}-g2`} cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color={accent} stop-opacity="0.7" />
+      <stop offset="1" stop-color={accent} stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id={`${uid}-g3`} cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color={mint} stop-opacity="0.55" />
+      <stop offset="1" stop-color={mint} stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id={`${uid}-sheen`} x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.14" />
+      <stop offset="0.6" stop-color="#fff" stop-opacity="0" />
+    </linearGradient>
+
+    <pattern id={`${uid}-grid`} width="54" height="54" patternUnits="userSpaceOnUse">
+      <path d="M54 0H0V54" fill="none" stroke="#fff" stroke-opacity="0.05" stroke-width="1" />
+    </pattern>
+
+    <filter id={`${uid}-soft`} x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="46" />
+    </filter>
+  </defs>
+
+  <rect width="800" height="600" fill={`url(#${uid}-bg)`} />
+  <rect width="800" height="600" fill={`url(#${uid}-grid)`} />
+
+  <g filter={`url(#${uid}-soft)`}>
+    <circle cx="250" cy="180" r="210" fill={`url(#${uid}-g1)`} />
+    <circle cx="640" cy="430" r="230" fill={`url(#${uid}-g2)`} />
+    <circle cx="120" cy="520" r="170" fill={`url(#${uid}-g3)`} />
+  </g>
+
+  <!-- geometric accents -->
+  <g fill="none" stroke={glow} stroke-opacity="0.45">
+    {cols.map((x, i) => (
+      <circle cx={x} cy={150 + i * 130} r={i % 2 === 0 ? 74 : 46} stroke-width="1.2" />
+    ))}
+  </g>
+
+  <path
+    d="M0 470 C 160 400, 300 560, 470 470 S 720 380, 800 440"
+    fill="none"
+    stroke={accent}
+    stroke-opacity="0.5"
+    stroke-width="1.4"
+  />
+
+  <g stroke="#fff" stroke-opacity="0.09">
+    {Array.from({ length: grid }).map((_, i) => (
+      <line x1="0" y1={i * (600 / grid)} x2="800" y2={i * (600 / grid)} />
+    ))}
+  </g>
+
+  <rect width="800" height="600" fill={`url(#${uid}-sheen)`} />
+</svg>

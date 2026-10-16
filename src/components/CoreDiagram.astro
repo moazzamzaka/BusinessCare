@@ -1,0 +1,48 @@
+---
+import { core } from '../data/site';
+---
+
+<section class="section" id="platform">
+  <div class="wrap">
+    <div class="section__head" data-reveal>
+      <span class="eyebrow">The platform</span>
+      <h2 class="h2">{core.heading}</h2>
+      <p class="lede">{core.lede}</p>
+    </div>
+
+    <div class="core" data-reveal>
+      <div class="core__band core__band--edge">
+        <div class="core__band__head">
+          <strong>{core.top.label}</strong>
+        </div>
+        <div class="core__items">
+          {core.top.items.map((it) => <span class="chip">{it}</span>)}
+        </div>
+      </div>
+
+      {core.layers.map((layer) => (
+        <div class="core__layer" style={`--accent:${layer.color}`}>
+          <h3>
+            <span class="swatch" aria-hidden="true"></span>
+            {layer.key}
+          </h3>
+          <p>{layer.desc}</p>
+          {layer.chips && (
+            <div class="core__items" style="grid-column:3">
+              {layer.chips.map((c) => <span class="chip">{c}</span>)}
+            </div>
+          )}
+        </div>
+      ))}
+
+      <div class="core__band core__band--edge">
+        <div class="core__band__head">
+          <strong>{core.bottom.label}</strong>
+        </div>
+        <div class="core__items">
+          {core.bottom.items.map((it) => <span class="chip">{it}</span>)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

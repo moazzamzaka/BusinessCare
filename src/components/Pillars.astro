@@ -1,0 +1,44 @@
+---
+import Art from './Art.astro';
+import { pillars, embed } from '../data/site';
+---
+
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section__head" data-reveal>
+      <span class="eyebrow">How we work</span>
+      <h2 class="h2">{pillars.heading}</h2>
+      <p class="lede">{pillars.lede}</p>
+    </div>
+
+    <div class="pillars" data-reveal>
+      {pillars.items.map((p) => (
+        <div class="pillar">
+          <h3>{p.name}</h3>
+          <p>{p.desc}</p>
+          <div class="pillar__links">
+            {p.links.map((l) => <span class="chip">{l}</span>)}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="embed" style="margin-top:2.5rem" data-reveal>
+      <div>
+        <h3 class="h3">{embed.heading}</h3>
+        <p class="lede" style="margin-top:1rem">{embed.body}</p>
+        <div class="embed__modes">
+          {embed.modes.map((m) => (
+            <div class="embed__mode">
+              <strong>{m.name}</strong>
+              <p>{m.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="embed__figure">
+        <Art hue={244} variant="wide" label="Engineers working alongside an operations team" />
+      </div>
+    </div>
+  </div>
+</section>

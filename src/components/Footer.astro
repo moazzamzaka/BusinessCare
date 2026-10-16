@@ -1,0 +1,45 @@
+---
+import LogoMark from './LogoMark.astro';
+import { meta, footer, offices } from '../data/site';
+---
+
+<footer class="footer" id="about">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <LogoMark name={meta.name} size={28} />
+        <p>{meta.tagline}</p>
+        <div class="footer__contact">
+          <a href={`mailto:${meta.email}`}>{meta.email}</a>
+          <a href={`tel:${meta.phone.replace(/\s/g, '')}`}>{meta.phone}</a>
+        </div>
+        <a class="btn btn--ghost" href={meta.social} rel="noopener">{meta.socialLabel}</a>
+      </div>
+
+      {footer.map((col) => (
+        <div class="footer__col">
+          <h3>{col.heading}</h3>
+          <ul>
+            {col.links.map((l) => (
+              <li><a href={l.href}>{l.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="footer__offices">
+      <strong style="color:var(--on-night)">Offices</strong>
+      {offices.map((o) => <span>{o}</span>)}
+    </div>
+
+    <div class="footer__bottom">
+      <span>{meta.legal}</span>
+      <div class="footer__legal">
+        <a href="#top">Privacy</a>
+        <a href="#top">Terms</a>
+        <a href={meta.social} rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</footer>
