@@ -24,9 +24,12 @@ jobs:
         uses: actions/checkout@v4
 
       # Builds the Astro site and uploads dist/ as a Pages artifact.
+      # Astro 7 requires Node >= 22.22, so we pin it explicitly (the action
+      # otherwise defaults to Node 20).
       - name: Build with Astro
         uses: withastro/action@v3
         with:
+          node-version: 22
           package-manager: npm
 
   deploy:
