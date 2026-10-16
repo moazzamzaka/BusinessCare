@@ -1,7 +1,7 @@
 /**
  * Single source of truth for every string on the site.
  *
- * NOTE: the brand, numbers, testimonials and contact details below are
+ * NOTE: the brand, numbers and contact details below are
  * PLACEHOLDERS written for layout purposes. Swap them for your real content.
  */
 
@@ -36,7 +36,6 @@ export const nav: {
     panel: [
       { label: 'AI agents', blurb: 'Workflows that run end to end', href: '#services' },
       { label: 'Generative AI', blurb: 'Answers from everything you know', href: '#services' },
-      { label: 'Machine learning', blurb: 'Forecasts, scoring and quality models', href: '#services' },
       { label: 'Data platforms', blurb: 'The foundation decisions run on', href: '#services' },
       { label: 'Strategy', blurb: 'Where AI pays off, and in what order', href: '#services' },
     ],
@@ -52,26 +51,12 @@ export const nav: {
     ],
   },
   {
-    label: 'Industries',
-    href: '#industries',
-    panel: [
-      { label: 'Healthcare & life sciences', blurb: 'Patient operations and flow', href: '#industries' },
-      { label: 'Banking & insurance', blurb: 'Service, risk and compliance', href: '#industries' },
-      { label: 'Telecommunications', blurb: 'Network and service operations', href: '#industries' },
-      { label: 'Transport & logistics', blurb: 'Fleet, freight and forecasting', href: '#industries' },
-      { label: 'Energy & manufacturing', blurb: 'Maintenance and risk modelling', href: '#industries' },
-      { label: 'Public sector', blurb: 'Citizen services at scale', href: '#industries' },
-      { label: 'Retail & consumer', blurb: 'Demand, pricing and search', href: '#industries' },
-      { label: 'Professional services', blurb: 'Delivery and back office', href: '#industries' },
-    ],
-  },
-  {
     label: 'How we work',
     href: '#how',
     panel: [
       { label: 'Deployment', blurb: 'Phases with a clear exit', href: '#how' },
       { label: 'Embedded engineers', blurb: 'On site, virtual, or both', href: '#how' },
-      { label: 'Trust & security', blurb: 'Hosting, models and audit', href: '#trust' },
+      { label: 'Trust & security', blurb: 'Hosting, models and audit', href: '#platform' },
     ],
   },
 ];
@@ -101,20 +86,13 @@ export const services = [
   },
   {
     n: '03',
-    kicker: 'Forecasts',
-    name: 'Machine learning',
-    desc: 'Forecasting, scoring and quality models that see what is coming, then help you act on it.',
-    href: '#services',
-  },
-  {
-    n: '04',
     kicker: 'Foundations',
     name: 'Data platforms',
     desc: 'One trusted set of numbers, in real time, for every team — the ground that decisions and agents run on.',
     href: '#services',
   },
   {
-    n: '05',
+    n: '04',
     kicker: 'Strategy',
     name: 'AI strategy',
     desc: 'Where AI pays off, and in what order. Roadmaps a board can sign off, priced on your own numbers.',
@@ -241,7 +219,7 @@ export const pillars = {
       name: 'Build',
       desc:
         'Agents for work that runs across systems, generative AI for answers from what you know, models for forecasts and scores, and the data platforms underneath.',
-      links: ['AI agents', 'Generative AI', 'Machine learning', 'Data platforms'],
+      links: ['AI agents', 'Generative AI', 'Data platforms'],
     },
     {
       name: 'Operate',
@@ -263,49 +241,6 @@ export const embed = {
   ],
 };
 
-export const industries = [
-  { name: 'Healthcare & life sciences', items: ['Patient service across channels', 'Hospital command centre', 'Voice of the patient'], hue: 190 },
-  { name: 'Banking & insurance', items: ['Service and sales agents', 'Regulatory compliance checks', 'Product knowledge'], hue: 262 },
-  { name: 'Telecommunications', items: ['Incident triage and auto-resolution', 'Network lifecycle analysis', 'Quality audit of calls'], hue: 215 },
-  { name: 'Transport & logistics', items: ['Agentic accounts payable', 'Workforce onboarding and identity', 'Demand and capacity forecasting'], hue: 168 },
-  { name: 'Energy & manufacturing', items: ['Predictive maintenance', 'Risk modelling', 'Field support with conversational AI'], hue: 36 },
-  { name: 'Public sector', items: ['Open-source intelligence', 'Health and city data platforms', 'Video analytics for safer cities'], hue: 300 },
-  { name: 'Retail & consumer', items: ['Product search and recommendations', 'Demand and promotion modelling', 'Pricing optimisation'], hue: 24 },
-  { name: 'Professional services', items: ['Delivery operations', 'Financial sustainability', 'Proposal and knowledge reuse'], hue: 232 },
-];
-
-export const testimonials = [
-  {
-    quote:
-      'The team stepped into problems well beyond the brief and fixed them regardless of ownership. Ten months on, the agents they built are still running the workflow.',
-    name: 'Sample quote — replace me',
-    role: 'Chief Technology Officer, placeholder client',
-    org: 'MERIDIAN',
-  },
-  {
-    quote:
-      'They were candid about what AI could and could not do, then built the part that mattered. Our analysts now spend their time deciding rather than assembling.',
-    name: 'Sample quote — replace me',
-    role: 'Head of Data, placeholder client',
-    org: 'BLUEPORT',
-  },
-  {
-    quote:
-      'One team took us from a board paper to a system in production, with the controls our auditors asked for built in from the first week.',
-    name: 'Sample quote — replace me',
-    role: 'Digital Director, placeholder client',
-    org: 'ORBITEL',
-  },
-];
-
-export const partners = [
-  { name: 'Cloud Partner', sub: 'Advanced tier services' },
-  { name: 'Data & AI Partner', sub: 'Certified solutions' },
-  { name: 'Compute Partner', sub: 'Verified consultancy' },
-  { name: 'CRM Partner', sub: 'Consulting partner' },
-  { name: 'ISO/IEC 27001', sub: 'Certified' },
-];
-
 export const closing = {
   heading: 'Bring us the work that is heaviest.',
   lede:
@@ -320,11 +255,10 @@ export const footer = [
     links: [
       { label: 'AI agents', href: '#services' },
       { label: 'Generative AI', href: '#services' },
-      { label: 'Machine learning', href: '#services' },
       { label: 'Data platforms', href: '#services' },
       { label: 'Strategy', href: '#services' },
       { label: 'Platform', href: '#platform' },
-      { label: 'Trust and security', href: '#trust' },
+      { label: 'Trust and security', href: '#platform' },
     ],
   },
   {
@@ -332,15 +266,12 @@ export const footer = [
     links: [
       { label: 'Deployment', href: '#how' },
       { label: 'Embedded engineers', href: '#how' },
-      { label: 'Industries', href: '#industries' },
-      { label: 'Partners', href: '#trust' },
       { label: 'Talk to us', href: '#contact' },
     ],
   },
   {
     heading: 'Company',
     links: [
-      { label: 'Clients', href: '#voices' },
       { label: 'About', href: '#about' },
       { label: 'Careers', href: '#about' },
     ],
