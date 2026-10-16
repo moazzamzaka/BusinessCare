@@ -33,6 +33,14 @@
   --line-night: rgba(166, 170, 198, 0.18);
   --line-night-2: rgba(166, 170, 198, 0.32);
 
+  /* surfaces that sit over page content */
+  --hdr-bg: rgba(11, 13, 38, 0.72);
+  --hdr-bg-2: rgba(11, 13, 38, 0.92);
+  --panel-1: rgba(17, 20, 58, 0.5);
+  --panel-2: rgba(11, 13, 38, 0.6);
+
+  color-scheme: dark;
+
   /* gradients */
   --grad: linear-gradient(100deg, #556efc 0%, #7f7fff 25%, #a291fd 50%, #ccb8ff 75%, #e9ddff 100%);
   --grad-deep: linear-gradient(100deg, #3f4df0 0%, #655cfa 50%, #9160f2 100%);
@@ -58,6 +66,38 @@
   --r: 16px;
   --r-lg: 24px;
   --r-xl: 32px;
+}
+
+/* --------------------------------------------------------------------------
+   Light theme
+   The system is fully tokenised, so flipping these values re-skins the site.
+   `data-theme` is set on <html> before first paint by an inline script.
+   -------------------------------------------------------------------------- */
+[data-theme='light'] {
+  color-scheme: light;
+
+  --night: #f6f7fb;
+  --night-2: #ffffff;
+  --night-3: #e9edf7;
+  --ink: #14162b;
+  --slate: #585d78;
+
+  --on-night: #14162b;
+  --on-night-2: #5a6078;
+  --line-night: rgba(20, 22, 43, 0.12);
+  --line-night-2: rgba(20, 22, 43, 0.22);
+
+  --hdr-bg: rgba(246, 247, 251, 0.78);
+  --hdr-bg-2: rgba(246, 247, 251, 0.94);
+  --panel-1: rgba(20, 22, 43, 0.03);
+  --panel-2: rgba(20, 22, 43, 0.045);
+
+  /* accents need more weight against a light surface */
+  --peri: #5b5fd6;
+  --signal-lt: #0b957c;
+
+  /* the pale end of the gradient disappears on white */
+  --grad: linear-gradient(100deg, #3f4df0 0%, #655cfa 50%, #9160f2 100%);
 }
 
 /* --------------------------------------------------------------------------
@@ -316,7 +356,7 @@ h4 {
   height: var(--hdr);
   display: flex;
   align-items: center;
-  background: rgba(11, 13, 38, 0.72);
+  background: var(--hdr-bg);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid transparent;
   transition: border-color 0.4s var(--ease-out), background 0.4s var(--ease-out);
@@ -324,7 +364,7 @@ h4 {
 
 .hdr.is-stuck {
   border-bottom-color: var(--line-night);
-  background: rgba(11, 13, 38, 0.92);
+  background: var(--hdr-bg-2);
 }
 
 .hdr__in {
@@ -404,6 +444,37 @@ h4 {
   align-items: center;
   gap: 0.6rem;
   flex: none;
+  /* Keeps the actions pinned to the right edge once the nav collapses. */
+  margin-left: auto;
+}
+
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 999px;
+  border: 1px solid var(--line-night-2);
+  display: grid;
+  place-items: center;
+  color: var(--on-night);
+  transition: background 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+}
+
+.theme-toggle:hover {
+  background: rgba(163, 168, 245, 0.12);
+  border-color: var(--peri);
+}
+
+.theme-toggle .icon-moon {
+  display: none;
+}
+
+[data-theme='light'] .theme-toggle .icon-sun {
+  display: none;
+}
+
+[data-theme='light'] .theme-toggle .icon-moon {
+  display: block;
 }
 
 /* Mega dropdown */
@@ -918,8 +989,10 @@ h4 {
   gap: 0.35rem;
 }
 
+/* The caption always sits over the dark artwork, so its text stays light in
+   both themes. */
 .showcase__caption .k {
-  color: var(--signal-lt);
+  color: #52ddb9;
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -930,6 +1003,7 @@ h4 {
   font-size: clamp(1.2rem, 1rem + 1vw, 1.7rem);
   font-weight: 700;
   letter-spacing: -0.02em;
+  color: #fff;
 }
 
 @media (max-width: 900px) {
@@ -958,11 +1032,11 @@ h4 {
   padding: clamp(1rem, 2vw, 1.4rem) clamp(1.1rem, 2.4vw, 1.75rem);
   display: grid;
   gap: 0.9rem;
-  background: rgba(17, 20, 58, 0.5);
+  background: var(--panel-1);
 }
 
 .core__band--edge {
-  background: rgba(11, 13, 38, 0.6);
+  background: var(--panel-2);
   border-style: dashed;
 }
 

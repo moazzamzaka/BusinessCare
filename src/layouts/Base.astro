@@ -27,6 +27,21 @@ const { title = meta.title, description = meta.description } = Astro.props;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={meta.url} />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <script is:inline>
+      // Applied before first paint so there is no flash of the wrong theme.
+      (function () {
+        try {
+          var saved = localStorage.getItem('bc-theme');
+          document.documentElement.setAttribute(
+            'data-theme',
+            saved === 'light' ? 'light' : 'dark'
+          );
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
@@ -197,12 +212,47 @@ const { title = meta.title, description = meta.description } = Astro.props;
         });
       };
 
+      // Theme toggle --------------------------------------------------------
+      const themeToggle = () => {
+        const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]')];
+        const root = document.documentElement;
+        const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+        if (!buttons.length) return;
+
+        const apply = (theme: 'light' | 'dark') => {
+          root.setAttribute('data-theme', theme);
+          if (meta) meta.content = theme === 'light' ? '#f6f7fb' : '#0b0d26';
+          buttons.forEach((b) => {
+            b.setAttribute('aria-pressed', String(theme === 'light'));
+            b.setAttribute(
+              'aria-label',
+              theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'
+            );
+          });
+        };
+
+        apply(root.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+
+        buttons.forEach((b) =>
+          b.addEventListener('click', () => {
+            const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            apply(next);
+            try {
+              localStorage.setItem('bc-theme', next);
+            } catch (e) {
+              /* storage blocked — the toggle still works for this session */
+            }
+          })
+        );
+      };
+
       reveal();
       header();
       drawer();
       parallax();
       showcase();
       navMenus();
+      themeToggle();
     </script>
   </body>
 </html>
